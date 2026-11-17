@@ -3,12 +3,6 @@ import json
 import re
 from pathlib import Path
 
-SCRABBLE_WORDS = []
-with Path(__file__).with_name("sowpods.txt").open() as f:
-    for line in f:
-        SCRABBLE_WORDS.append(line.strip().upper())
-
-
 def validate_word(required_letter: str, all_letters: str, word: str):
     '''
     The function determines if word is a valid word
