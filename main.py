@@ -84,24 +84,31 @@ def fetch_nyt_letters():
     today = game_data["today"]
     required_letter = today["centerLetter"].upper()
     all_letters = "".join(today["validLetters"]).upper()
+    answers = [word.upper() for word in today["answers"]]
 
-    return required_letter, all_letters
+    return required_letter, all_letters, answers
 
 try:
-    required_letter, all_letters = fetch_nyt_letters()
+    required_letter, all_letters, answers = fetch_nyt_letters()
 
-    print("Required Letter：", required_letter)
-    print("All Letters：", all_letters)
+    print("Required Letter:", required_letter)
+    print("All Letters:", all_letters)
 
-    results = spelling_bee(required_letter, all_letters)
+    results = []
+
+    for word in answers:
+        score = score_word(required_letter, all_letters, word)
+        results.append((score, word))
+
+    results.sort(reverse=True)
 
     for score, word in results:
         print(word, score)
 
-    print("Number of Answers：", len(results))
-    print("Highest Score：", sum(score for score, word in results))
+    print("NYT Answer Count:", len(results))
+    print("NYT Maximum Score:", sum(score for score, word in results))
 
 except Exception as error:
-    print("Could not fetch data：", error)
+    print("Could not fetch data:", error)
 
 input("\nPress enter to exit...")
