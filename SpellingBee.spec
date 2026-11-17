@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('sowpods.txt', '.')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

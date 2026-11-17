@@ -1,7 +1,6 @@
 import urllib.request
 import json
 import re
-from pathlib import Path
 
 def validate_word(required_letter: str, all_letters: str, word: str):
     '''
@@ -47,14 +46,6 @@ def score_word(required_letter, all_letters, word):
         score += 7
 
     return score
-
-
-def spelling_bee(required_letter, all_letters):
-    scores = []
-    for word in SCRABBLE_WORDS:
-        if score_word(required_letter, all_letters, word) > 0:
-            scores.append((score_word(required_letter, all_letters, word), word))
-    return sorted(scores)[::-1]
 
 def fetch_nyt_letters():
     url = "https://www.nytimes.com/puzzles/spelling-bee"
